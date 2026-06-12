@@ -66,6 +66,17 @@ env/
 .ccls-cache/
 compile_commands.json
 
+# Project debug artifacts
+build_log.txt
+test_output.txt
+flash.bat
+
+# Claude Code local settings
+.claude/
+
+# Clangd cache
+.cache/
+
 # Windows specific
 Thumbs.db
 ehthumbs.db

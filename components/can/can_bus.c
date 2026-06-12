@@ -148,14 +148,14 @@ static bool mcp_set_mode(uint8_t mode)
 
 static void mcp_set_baud_rate(void)
 {
-    /* Bit-timing table for 16 MHz MCP2515 crystal.
+    /* Bit-timing table for 8 MHz MCP2515 crystal.
        SyncSeg is always 1 TQ.
        BRP, PropSeg, PS1, PS2 values stored as (actual - 1). */
 #if defined(CONFIG_CAN_SPEED_125K)
-    /* 125kbps with 8MHz crystal: BRP=2 TQ=0.5us NBT=16, 采样点 75% */
-    uint8_t cnf1 = 0x81;
-    uint8_t cnf2 = 0xE5;
-    uint8_t cnf3 = 0x83;
+    /* 125kbps with 8MHz crystal: BRP=4 TQ=1us NBT=16, SJW=1, 采样点 75% */
+    uint8_t cnf1 = 0x03;
+    uint8_t cnf2 = 0x9E;
+    uint8_t cnf3 = 0x03;
 #elif defined(CONFIG_CAN_SPEED_250K)
     /* 250 kbps : BRP=1 -> TQ=250 ns, NBT=16: Prop=7 PS1=4 PS2=4 SJW=1 */
     uint8_t cnf1 = 0x01;
@@ -193,12 +193,6 @@ static esp_err_t mcp2515_init(void)
     }
 
     mcp_set_baud_rate();
-
-    /* 回读 CNF 寄存器确认写入正确 */
-    uint8_t cnf1 = mcp_read_reg(MCP_REG_CNF1);
-    uint8_t cnf2 = mcp_read_reg(MCP_REG_CNF2);
-    uint8_t cnf3 = mcp_read_reg(MCP_REG_CNF3);
-    ESP_LOGI(TAG, "CNF readback: CNF1=0x%02x CNF2=0x%02x CNF3=0x%02x", cnf1, cnf2, cnf3);
 
     /* Accept all messages on both RX buffers (no filtering) */
     mcp_write_reg(MCP_REG_RXB0CTRL, 0x60);  /* receive any, no RTR flag */
