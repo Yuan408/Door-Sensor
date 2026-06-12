@@ -1,0 +1,21 @@
+menu "WiFi Station Configuration"
+
+config ENABLE_WIFI
+    bool "Enable WiFi"
+    default y
+    help
+        Enable WiFi Station mode.
+
+config WIFI_SSID
+    string "WiFi SSID"
+    default "myssid"
+    help
+        SSID (WiFi network name) to connect to.
+
+config WIFI_PASSWORD
+    string "WiFi Password"
+    default "mypassword"
+    help
+        Password for the WiFi network.
+
+endmenu

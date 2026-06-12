@@ -1,0 +1,47 @@
+menu "CAN Bus Configuration"
+
+config ENABLE_CAN
+    bool "Enable CAN Bus"
+    default y
+    help
+        Enable MCP2515 CAN bus support. Requires an MCP2515 module
+        connected via SPI (CS=GPIO5, SCK=GPIO18, MISO=GPIO19, MOSI=GPIO23).
+
+choice CAN_SPEED
+    prompt "CAN Bus Speed"
+    default CAN_SPEED_125K
+    depends on ENABLE_CAN
+
+config CAN_SPEED_125K
+    bool "125 kbps"
+
+config CAN_SPEED_250K
+    bool "250 kbps"
+
+config CAN_SPEED_500K
+    bool "500 kbps"
+
+endchoice
+
+choice CAN_MODE
+    prompt "CAN Controller Mode"
+    default CAN_MODE_NORMAL
+    depends on ENABLE_CAN
+    help
+        Normal: communicate with external CAN nodes.
+        Listen-only: receive bus frames without transmitting ACK or data.
+        Loopback: self-test mode — TX internally routed to RX,
+        useful for single-board driver validation.
+
+config CAN_MODE_NORMAL
+    bool "Normal"
+
+config CAN_MODE_LISTEN
+    bool "Listen-only"
+
+config CAN_MODE_LOOPBACK
+    bool "Loopback (self-test)"
+
+endchoice
+
+endmenu
