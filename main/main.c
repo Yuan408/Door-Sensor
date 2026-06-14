@@ -304,7 +304,7 @@ void app_main(void)
 {
     esp_err_t ret;
 
-    ESP_LOGI(TAG, "App version: 2");
+    ESP_LOGI(TAG, "App version: 1 stable");
 
     /* ==================== NVS 初始化 ==================== */
     /* NVS（Non-Volatile Storage）用于保存配置和运行状态，掉电不丢失 */
