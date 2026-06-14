@@ -457,9 +457,9 @@ void app_main(void)
         snprintf(line1, sizeof(line1), "U:%.1fC %.1f%%", avg_temp, avg_humi);
 #ifdef CONFIG_ENABLE_CAN
         if (g_can_temp > -99.0f || g_can_humi > -99.0f) {
-            snprintf(line2, sizeof(line2), "R:%.1fC %.1f%%", g_can_temp, g_can_humi);
+            snprintf(line2, sizeof(line2), "D:%.1fC %.1f%%", g_can_temp, g_can_humi);
         } else {
-            snprintf(line2, sizeof(line2), "R: --");
+            snprintf(line2, sizeof(line2), "D: --");
         }
 #else
         snprintf(line2, sizeof(line2), "H:%.1f %%", avg_humi);
