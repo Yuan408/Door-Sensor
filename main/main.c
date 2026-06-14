@@ -454,7 +454,7 @@ void app_main(void)
         /* 第7步：OLED 显示 —— L 行本地，R 行 CAN 远端（来自回环帧） */
         char line1[17] = {0};
         char line2[17] = {0};
-        snprintf(line1, sizeof(line1), "L:%.1fC %.1f%%", avg_temp, avg_humi);
+        snprintf(line1, sizeof(line1), "U:%.1fC %.1f%%", avg_temp, avg_humi);
 #ifdef CONFIG_ENABLE_CAN
         if (g_can_temp > -99.0f || g_can_humi > -99.0f) {
             snprintf(line2, sizeof(line2), "R:%.1fC %.1f%%", g_can_temp, g_can_humi);
